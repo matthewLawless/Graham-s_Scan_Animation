@@ -1,0 +1,6 @@
+﻿  Main.cpp
+C:\Users\Matthew\source\repos\Graham's_Scan_Animation\Graham's_Scan_Animation\Main.cpp(30,25): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Matthew\source\repos\Graham's_Scan_Animation\Graham's_Scan_Animation\Main.cpp(30,22): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Matthew\source\repos\Graham's_Scan_Animation\Graham's_Scan_Animation\Main.cpp(39,25): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Matthew\source\repos\Graham's_Scan_Animation\Graham's_Scan_Animation\Main.cpp(39,22): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Graham's_Scan_Animation.vcxproj -> C:\Users\Matthew\source\repos\Graham's_Scan_Animation\x64\Debug\Graham's_Scan_Animation.exe
