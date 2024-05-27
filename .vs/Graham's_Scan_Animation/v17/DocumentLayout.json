@@ -5,6 +5,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{DD336448-964E-4E3D-AEA8-3980616A5B4D}|Graham\u0027s_Scan_Animation\\Graham\u0027s_Scan_Animation.vcxproj|C:\\Users\\Matthew\\source\\repos\\Graham\u0027s_Scan_Animation\\Graham\u0027s_Scan_Animation\\Main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{DD336448-964E-4E3D-AEA8-3980616A5B4D}|Graham\u0027s_Scan_Animation\\Graham\u0027s_Scan_Animation.vcxproj|solutionrelative:Graham\u0027s_Scan_Animation\\Main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DD336448-964E-4E3D-AEA8-3980616A5B4D}|Graham\u0027s_Scan_Animation\\Graham\u0027s_Scan_Animation.vcxproj|C:\\Users\\Matthew\\source\\repos\\Graham\u0027s_Scan_Animation\\Graham\u0027s_Scan_Animation\\test1.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{DD336448-964E-4E3D-AEA8-3980616A5B4D}|Graham\u0027s_Scan_Animation\\Graham\u0027s_Scan_Animation.vcxproj|solutionrelative:Graham\u0027s_Scan_Animation\\test1.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,8 +18,20 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "test1.txt",
+              "DocumentMoniker": "C:\\Users\\Matthew\\source\\repos\\Graham\u0027s_Scan_Animation\\Graham\u0027s_Scan_Animation\\test1.txt",
+              "RelativeDocumentMoniker": "Graham\u0027s_Scan_Animation\\test1.txt",
+              "ToolTip": "C:\\Users\\Matthew\\source\\repos\\Graham\u0027s_Scan_Animation\\Graham\u0027s_Scan_Animation\\test1.txt",
+              "RelativeToolTip": "Graham\u0027s_Scan_Animation\\test1.txt",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAHAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2024-05-19T19:47:30.406Z"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -24,7 +40,7 @@
               "RelativeDocumentMoniker": "Graham\u0027s_Scan_Animation\\Main.cpp",
               "ToolTip": "C:\\Users\\Matthew\\source\\repos\\Graham\u0027s_Scan_Animation\\Graham\u0027s_Scan_Animation\\Main.cpp",
               "RelativeToolTip": "Graham\u0027s_Scan_Animation\\Main.cpp",
-              "ViewState": "AQIAAAkAAAAAAAAAAAAAADQAAAAEAAAA",
+              "ViewState": "AQIAAGwAAAAAAAAAAAAAAIAAAAA5AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-05-17T19:12:58.117Z",
               "EditorCaption": ""
