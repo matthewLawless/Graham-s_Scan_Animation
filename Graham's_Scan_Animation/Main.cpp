@@ -206,12 +206,15 @@ int main(int argc, char* argv[]) {
 
 	bool algoBegan = false;
 	bool LupperIsReadyToDraw = false;
+	bool LlowerIsReadyToDraw = false;
+
+	std::vector<sf::Vertex>  Lupper;
+	std::vector<sf::Vertex> Llower;
 	
 
 	while (window.isOpen()) {
 
-		std::vector<sf::Vertex>  Lupper;
-
+		
 
 		while (window.pollEvent(e)) {
 
@@ -233,6 +236,12 @@ int main(int argc, char* argv[]) {
 			if (LupperIsReadyToDraw) {
 			
 				drawUpperHullToWindow(Lupper, &window);
+			
+			}
+
+			if (LlowerIsReadyToDraw) {
+			
+				drawUpperHullToWindow(Llower, &window);
 			
 			}
 			
@@ -273,6 +282,8 @@ int main(int argc, char* argv[]) {
 				}
 
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+
+
 
 					algoBegan = true;
 					std::cout << "---Graham's Scan initiated---" << std::endl;
@@ -348,7 +359,7 @@ int main(int argc, char* argv[]) {
 						//window.draw(line2);
 
 
-						sf::Vertex vList1[2] =
+						/*sf::Vertex vList1[2] =
 						{
 							sf::Vertex(p1),
 							sf::Vertex(p2)
@@ -364,15 +375,13 @@ int main(int argc, char* argv[]) {
 
 						};
 
-						window.draw(vList2, 2, sf::Lines);
+						window.draw(vList2, 2, sf::Lines);*/
 
+						LupperIsReadyToDraw = true;
+
+						drawUpperHullToWindow(Lupper, &window);
 
 						window.display();
-
-
-
-
-
 
 						//compute the cross product of these two
 						/*
@@ -400,19 +409,13 @@ int main(int argc, char* argv[]) {
 						}
 
 						char c;
-						while (true) {
-						
+						while (true) {						
 							std::cout << "---Press 'c' to continue---" << std::endl;
 							std::cin >> c;
-
 							if (c == 'c') {
-							
 								break;
-							
 							}
-
 						}
-
 					}
 
 					std::cout << "Upper hull:" << std::endl;
@@ -434,15 +437,60 @@ int main(int argc, char* argv[]) {
 
 					std::cout << "---Computing lower hull---" << std::endl;
 
+					Llower.push_back(pointList[pointList.size() - 1]);
+					Llower.push_back(pointList[pointList.size() - 2]);
 
+					for (int i = pointList.size() - 3; i >= 0; i--) {
+					
+						Llower.push_back(pointList[i]);
+						sf::Vertex p1 = Llower[Llower.size() - 1];
+						sf::Vertex p2 = Llower[Llower.size() - 2];
+						sf::Vertex p3 = Llower[Llower.size() - 3];
+						double crossProd = computeCrossProduct(p1, p2, p3);
+
+						while (Llower.size() > 2 && crossProd > 0) {
+							Llower.erase(Llower.end() - 2);
+
+							p1 = Llower[Llower.size() - 1];
+							p2 = Llower[Llower.size() - 2];
+							p3 = Llower[Llower.size() - 3];
+
+							crossProd = computeCrossProduct(p1, p2, p3);	
+						}
+
+						char c;
+						while (true) {
+							std::cout << "---Press 'c' to continue---" << std::endl;
+							std::cin >> c;
+							if (c == 'c') {
+								break;
+							}
+						}
+
+						std::cout << "Lower hull:" << std::endl;
+
+						for (sf::Vertex v : Llower) {
+
+							std::cout << "(" << v.position.x << ", " << v.position.y << "), ";
+
+						}
+
+						LlowerIsReadyToDraw = true;
+
+						drawUpperHullToWindow(Llower, &window);
+						drawUpperHullToWindow(Lupper, &window);
+
+						window.display();
+
+						std::cout << std::endl;
+					
+					}
+
+					std::cout << "---Graham's Scan Complete---" << std::endl;
 
 				}
 
 			}
-
-
-
-
 
 			window.display();
 		}
