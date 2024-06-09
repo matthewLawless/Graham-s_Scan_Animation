@@ -5,12 +5,17 @@
 #include <string>
 #include <sstream>
 #include <string>
+#include <thread>
+#include <chrono>
+#include <windows.h>
+
 
 
 bool compareVertices(sf::Vertex p1, sf::Vertex p2) {
 
-	if (p1.position.x > p2.position.x) { return false; } 
-	else { return true; }
+	/*if (p1.position.x > p2.position.x) { return false; } 
+	else { return true; }*/
+	return (p1.position.x < p2.position.x);
 
 }
 
@@ -82,6 +87,22 @@ void drawUpperHullToWindow(std::vector<sf::Vertex> Lupper, sf::RenderWindow* win
 
 }
 
+void populateFileWithRandomPointset(std::string filename, int numberOfPoints) {
+
+	std::ofstream file(filename);
+
+	srand((unsigned)time(NULL));
+	for (int i = 0; i < numberOfPoints; i++) {
+	
+		int x = 1 + (rand() % 100);
+		int y = 1 + (rand() % 100);
+		file << "(" << x << ", " << y << ")\n";
+
+	
+	}
+
+}
+
 /*
 Computes the cross product of the vectors:
 v1->v2 and v2->v3
@@ -121,12 +142,14 @@ int main(int argc, char* argv[]) {
 
 	int width;
 	int height;
-	int scale = 10;
+	double scale = 7.5;
 
 	std::cout << argc << std::endl;
 	std::cout << argv[1] << std::endl;
 
 	std::vector<sf::Vertex> pointList;
+	
+	//populateFileWithRandomPointset(argv[1], 20);
 
 	std::ifstream inputFile(argv[1]);
 
@@ -191,7 +214,7 @@ int main(int argc, char* argv[]) {
 	width = xMax * scale + scale;
 	height = yMax * scale + scale;
 
-	sf::RenderWindow window(sf::VideoMode(width, height), "Plane", sf::Style::Close);
+	sf::RenderWindow window(sf::VideoMode(width, height), "Plane", sf::Style::Fullscreen);
 	sf::Event e;
 
 	/*for (sf::Vertex v : pointList) {
@@ -285,7 +308,7 @@ int main(int argc, char* argv[]) {
 
 
 
-					algoBegan = true;
+					algoBegan = true;  
 					std::cout << "---Graham's Scan initiated---" << std::endl;
 
 
@@ -331,13 +354,14 @@ int main(int argc, char* argv[]) {
 					std::cout << "---Computing upper hull---" << std::endl;
 
 
-					for (int i = 2; i < pointList.size(); i++) {
+					for (int i = 2; i <= pointList.size(); i++) {
 
 						window.clear();
 
 						drawPointsToWindow(pointList, &window);
-
-						Lupper.push_back(pointList[i]);
+						if (i != pointList.size()) {
+							Lupper.push_back(pointList[i]);
+						}
 						//check to see if the last three points make a right turn
 						sf::Vertex p1 = Lupper[Lupper.size() - 3];
 						sf::Vertex p2 = Lupper[Lupper.size() - 2];
@@ -380,6 +404,12 @@ int main(int argc, char* argv[]) {
 						LupperIsReadyToDraw = true;
 
 						drawUpperHullToWindow(Lupper, &window);
+						std::cout << "Upper hull:" << std::endl;
+						for (sf::Vertex v : Lupper) {
+
+							std::cout << "(" << v.position.x << ", " << v.position.y << ")" << std::endl;
+
+						}
 
 						window.display();
 
@@ -409,13 +439,15 @@ int main(int argc, char* argv[]) {
 						}
 
 						char c;
-						while (true) {						
+						/*while (true) {						
 							std::cout << "---Press 'c' to continue---" << std::endl;
 							std::cin >> c;
 							if (c == 'c') {
 								break;
 							}
-						}
+							
+						}*/
+						Sleep(250);
 					}
 
 					std::cout << "Upper hull:" << std::endl;
@@ -429,6 +461,9 @@ int main(int argc, char* argv[]) {
 
 					LupperIsReadyToDraw = true;
 
+					window.clear();
+					drawPointsToWindow(pointList, &window);
+
 					drawUpperHullToWindow(Lupper, &window);
 
 					window.display();
@@ -441,7 +476,19 @@ int main(int argc, char* argv[]) {
 					Llower.push_back(pointList[pointList.size() - 2]);
 
 					for (int i = pointList.size() - 3; i >= 0; i--) {
-					
+
+						window.clear();
+
+
+						drawPointsToWindow(pointList, &window);
+						drawUpperHullToWindow(Llower, &window);
+						drawUpperHullToWindow(Lupper, &window);
+
+
+						window.display();
+						
+
+
 						Llower.push_back(pointList[i]);
 						sf::Vertex p1 = Llower[Llower.size() - 1];
 						sf::Vertex p2 = Llower[Llower.size() - 2];
@@ -457,6 +504,7 @@ int main(int argc, char* argv[]) {
 
 							crossProd = computeCrossProduct(p1, p2, p3);	
 						}
+						
 
 						char c;
 						while (true) {
@@ -471,16 +519,15 @@ int main(int argc, char* argv[]) {
 
 						for (sf::Vertex v : Llower) {
 
-							std::cout << "(" << v.position.x << ", " << v.position.y << "), ";
+							std::cout << "(" << v.position.x << ", " << v.position.y << ")" << std::endl;
 
 						}
 
 						LlowerIsReadyToDraw = true;
 
-						drawUpperHullToWindow(Llower, &window);
-						drawUpperHullToWindow(Lupper, &window);
+						
 
-						window.display();
+						
 
 						std::cout << std::endl;
 					
